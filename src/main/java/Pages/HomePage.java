@@ -23,7 +23,8 @@ public class HomePage  {
 
 
     public  void  Hover_Hello(){
-        Actions ac=new Actions(this.d);
+        Actions ac=new Actions(d);
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(Hello_filed));
         ac.moveToElement(d.findElement(Hello_filed)).build().perform();
     }
 
@@ -32,7 +33,6 @@ public class HomePage  {
         d.findElement(By.xpath("//span[@class=\"nav-action-inner\"]")).click();
         return new LoginPage(d);
     }
-
 
 
     public  Wait waitf(){

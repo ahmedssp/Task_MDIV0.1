@@ -58,6 +58,6 @@ public class base {
                 .ignoring(Exception.class);
         return wait;
     }
-    
+
 
 }
