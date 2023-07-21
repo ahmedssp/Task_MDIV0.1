@@ -1,8 +1,7 @@
 package Testing_Package;
 import Base_Package.base;
-import Pages.LoginPage;
+import Pages.LoginPage_Page;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -19,15 +18,15 @@ public class testall  extends base {
     public void login_with_nonREjesterdEmail() throws InterruptedException {
 
         //1-make hover on hello tab
-         homePage_obj.Hover_Hello();
+         hellooverlay_obj.Hover_Hello();
         //2- press on sigen in tab
-        LoginPage loginPage_obj= homePage_obj.Click_sigenin();
+        LoginPage_Page loginPagePage_obj = hellooverlay_obj.Click_sigenin();
         //3-inter valideEmail_not register
-        loginPage_obj.send_unregister_mail("ahmedabdelsalame20@gmail.com");
+        loginPagePage_obj.send_unregister_mail("ahmedabdelsalame20@gmail.com");
         //4-prtess continu to togin
-        loginPage_obj.click_continue();
+        loginPagePage_obj.click_continue();
         //5- asserion for cant logen
-       Assert.assertTrue(loginPage_obj.Assertion_login());
+       Assert.assertTrue(loginPagePage_obj.Assertion_login());
 
     }    @Test(priority = 2)
     public void added_Items() throws InterruptedException {
@@ -111,26 +110,14 @@ public class testall  extends base {
 
 
          for (int i = 0; i < 3; i++) {
-             waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-link-accountList-nav-line-1")));
-             new Actions(d).moveToElement(d.findElement(By.id("nav-link-accountList-nav-line-1"))).build().perform();
-
-             System.out.println(d.findElement(LI.get(i)).getText());
+             hellooverlay_obj.Hover_Hello();
              waitf().until(ExpectedConditions.visibilityOfElementLocated(LI.get(i)));
              d.findElement(LI.get(i)).click();
-
-             if (i == 0) {
-                 waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class=\"a-spacing-small\"]")));
-                 ass.assertTrue(d.findElement(By.cssSelector("h1[class=\"a-spacing-small\"]")).getText().toLowerCase().contains("sign in"));
-                 d.navigate().back();
-
-             } else if (i == 1) {
-                 waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class=\"a-spacing-small\"]")));
-                 ass.assertTrue(d.findElement(By.cssSelector("h1[class=\"a-spacing-small\"]")).getText().toLowerCase().contains("sign in"));
-                 d.navigate().back();
-
-             } else if (i == 2) {
-                 waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span[class=\"al-intro-banner-header\"]")));
-                 ass.assertTrue(d.findElement(By.cssSelector("span[class=\"al-intro-banner-header\"]")).getText().toLowerCase().contains("lists"));
+             if (i == 0 ||i==1) {
+                 ass.assertTrue(hellooverlay_obj.Assertion_WE_in_SignIN_page());
+                 d.navigate().back();}
+              else if (i == 2) {
+                 ass.assertTrue(hellooverlay_obj.Assert_seeLists_intro_screen());
                  d.navigate().back();
 
              }

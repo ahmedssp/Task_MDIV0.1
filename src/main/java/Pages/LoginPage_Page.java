@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage_Page {
     private WebDriver d;
-    public LoginPage(WebDriver d){this.d=d;}
+    public LoginPage_Page(WebDriver d){this.d=d;}
     private By firestnameField = By.id("nf-field-17");
     public  void send_unregister_mail(String unregMail){
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("ap_email")));

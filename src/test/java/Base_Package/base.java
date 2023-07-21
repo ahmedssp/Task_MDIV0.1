@@ -1,5 +1,5 @@
 package Base_Package;
-import Pages.HomePage;
+import Pages.Hello_overlay_Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +18,7 @@ import java.time.Duration;
 
 public class base {
     protected WebDriver d;
-    protected HomePage homePage_obj;
+    protected Hello_overlay_Page hellooverlay_obj;
 
 
     @BeforeMethod
@@ -26,7 +26,7 @@ public class base {
         d= new ChromeDriver();
         d.get("https://www.amazon.eg/");
         d.manage().window().maximize();
-        homePage_obj=new HomePage(d);
+        hellooverlay_obj =new Hello_overlay_Page(d);
         //1-make hover of language tap
         Actions ac=new Actions(d);
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("icp-nav-flyout")));

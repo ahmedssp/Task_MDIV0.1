@@ -1,0 +1,52 @@
+package Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+import java.time.Duration;
+
+
+public class Hello_overlay_Page {
+    private WebDriver d;
+    public Hello_overlay_Page(WebDriver d){this.d=d;}
+
+    private By Hello_filed = By.id("nav-link-accountList-nav-line-1");
+    private By SignIn_button_filed=By.xpath("//span[@class=\"nav-action-inner\"]");
+    private By HelloTap_filed = By.id("nav-link-accountList");
+
+
+
+    public  void  Hover_Hello(){
+        Actions ac=new Actions(d);
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(Hello_filed));
+        ac.moveToElement(d.findElement(Hello_filed)).build().perform();
+    }
+
+    public LoginPage_Page Click_sigenin(){
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(SignIn_button_filed));
+        d.findElement(SignIn_button_filed).click();
+        return new LoginPage_Page(d);
+    }
+    public boolean Assertion_WE_in_SignIN_page( ){
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class=\"a-spacing-small\"]")));
+        return d.findElement(By.cssSelector("h1[class=\"a-spacing-small\"]")).getText().toLowerCase().contains("sign in");
+    }
+    public boolean Assert_seeLists_intro_screen( ){
+
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span[class=\"al-intro-banner-header\"]")));
+        return  d.findElement(By.cssSelector("span[class=\"al-intro-banner-header\"]")).getText().toLowerCase().contains("lists");
+    }
+
+
+    public  Wait waitf(){
+        Wait wait = new FluentWait( d)
+                .withTimeout(Duration.ofSeconds(12))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(Exception.class);
+        return wait;
+    }
+}
