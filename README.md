@@ -5,7 +5,7 @@ Create 3 Tests for each Senario using Selenume webdriver and assersion TestNg
 
 -2- for Senario 2 (Verify that Items are added to cart correctly) 
 
-   we are follow steps of user we cosider
+   we are follow steps of user and cosider the following:
    
        -A- some products have one Item so we add only the available one item to avoide Assertion Faild
        -B- New offers come with product so we reject it
