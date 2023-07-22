@@ -1,7 +1,8 @@
 # Task_MDIV0.1
 Create 3 Tests for each Senario using Selenume webdriver and assersion TestNg
 
--1-for Senario 1 add @Test we using Valid Gmail But not registered email 
+-1-for Senario 1 add @Test we using Valid Gmail But not registered email
+
 -2- for Senario 2 (Verify that Items are added to cart correctly) 
 
    we are follow steps of user we cosider
