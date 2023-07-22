@@ -1,5 +1,6 @@
 package Base_Package;
-import Pages.Hello_overlay_Page;
+import Pages.Home_Page;
+import Pages.TodayDeals_Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +19,8 @@ import java.time.Duration;
 
 public class base {
     protected WebDriver d;
-    protected Hello_overlay_Page hellooverlay_obj;
+    protected Home_Page Home_PgObj;
+    protected TodayDeals_Page TodayDeals_PgObj;
 
 
     @BeforeMethod
@@ -26,7 +28,9 @@ public class base {
         d= new ChromeDriver();
         d.get("https://www.amazon.eg/");
         d.manage().window().maximize();
-        hellooverlay_obj =new Hello_overlay_Page(d);
+        Home_PgObj =new Home_Page(d);
+        TodayDeals_PgObj=new TodayDeals_Page(d);
+
         //1-make hover of language tap
         Actions ac=new Actions(d);
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("icp-nav-flyout")));

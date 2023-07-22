@@ -1,129 +1,99 @@
 package Testing_Package;
+
 import Base_Package.base;
+import Pages.Cart_Page;
 import Pages.LoginPage_Page;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.*;
+import java.util.ArrayList;
 
 
-public class testall  extends base {
+public class testall extends base {
 
 
     @Test(priority = 1)
     public void login_with_nonREjesterdEmail() throws InterruptedException {
 
         //1-make hover on hello tab
-         hellooverlay_obj.Hover_Hello();
+        Home_PgObj.Hover_Hello();
         //2- press on sigen in tab
-        LoginPage_Page loginPagePage_obj = hellooverlay_obj.Click_sigenin();
+        LoginPage_Page loginPagePage_obj = Home_PgObj.Click_sigenin();
         //3-inter valideEmail_not register
         loginPagePage_obj.send_unregister_mail("ahmedabdelsalame20@gmail.com");
         //4-prtess continu to togin
         loginPagePage_obj.click_continue();
         //5- asserion for cant logen
-       Assert.assertTrue(loginPagePage_obj.Assertion_login());
-
+        Assert.assertTrue(loginPagePage_obj.Assertion_login());
     }    @Test(priority = 2)
     public void added_Items() throws InterruptedException {
-
         //1-click on all tap
-        d.findElement(By.xpath("//i[@class=\"hm-icon nav-sprite\"]")).click();
-
+        Home_PgObj.Click_AllTap();
         //2-from list select Today's Deals
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()=\"Today's Deals\" and @class=\"hmenu-item\"]")));
-        d.findElement(By.xpath("//a[text()=\"Today's Deals\" and @class=\"hmenu-item\"]")).click();
-
-        //3- clich second categoryes
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()=\"Home & Kitchen\" and contains(@class,\"GridPresets-module\")]")));
-
-        d.findElement(By.xpath("//span[text()=\"Home & Kitchen\" and contains(@class,\"GridPresets-module\")]")).click();
+        Home_PgObj.Click_Todays_Deals();
+        //3- click second categoryes
+        TodayDeals_PgObj.click_second_categoryes();
         //4-click on First product
+        TodayDeals_PgObj.click_Firstproduct();
 
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class=\"DealCard-module__contentWithPadding_1mEcEYf1DvbvZJ9zcQCxtw\"]/a)[2]")));
-
-        d.findElement(By.xpath("(//div[@class=\"DealCard-module__contentWithPadding_1mEcEYf1DvbvZJ9zcQCxtw\"]/a)[2]")).click();
-        //>>>>>>>>wait for next step -5-
-
-
-  // if q is not (5 -6)else (6)// some product have only one type
         //5-Click on 2nd item in this product
-        try {
-            waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//ul[@class=\"a-unordered-list a-nostyle a-horizontal a-spacing-none\"]/li)[2]")));
-            d.findElement(By.xpath("(//ul[@class=\"a-unordered-list a-nostyle a-horizontal a-spacing-none\"]/li)[2]")).click();
+        TodayDeals_PgObj.Second_item_Click();
+        //6-add qty=2
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("productTitle")));
+        String productTitle1= d.findElement(By.id("productTitle")).getText().toLowerCase();
+        Double Totalprice1= Double.parseDouble(d.findElement(By.cssSelector("span[class=\"a-price-whole\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",",""));
 
-        }catch (Exception e ){System.out.println("this product have one item ");};
-
-        //6-add q= 2
-        String  productTitle=null;String price1="";Boolean x=true;
-        try {
-            productTitle=d.findElement(By.id("productTitle")).getText().toLowerCase();
-             price1 = d.findElement(By.cssSelector("span[class=\"a-price-whole\"]")).getText().toLowerCase();
-            waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("quantity")));
-               Select select=new Select(d.findElement(By.id("quantity")));
-               select.selectByValue("2");
-        }catch (Exception e ){System.out.println("this product have one Qty ");x=false;}
-        //7- prress add add-to-cart-button
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
-        d.findElement(By.id("add-to-cart-button")).click();
-        try {
-        d.findElement(By.id("attachSiNoCoverage-announce")).click();
-        }catch (Exception e ){System.out.println("No offers");};
+        TodayDeals_PgObj.add_QTY();
+//        7- prress add add-to-cart-button
+        TodayDeals_PgObj.prress_add_cart_button();
         //9-go to Chart
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-cart-count-container")));
-        d.findElement(By.id("nav-cart-count-container")).click();
+        Cart_Page cartPage_Obj= TodayDeals_PgObj.GotoCarte_page();
+
         //10- assert for
-        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class=\"sc-badge-price-to-pay\"]")));
-        String price2=d.findElement(By.cssSelector("div[class=\"sc-badge-price-to-pay\"]")).getText().toLowerCase();
+//        SoftAssert ass=new SoftAssert();
+        //1>assert qty
+        Assert.assertTrue(cartPage_Obj.Assertion_Qty());
+        //2> name assertion
+        System.out.println(productTitle1);
+        Assert.assertTrue(cartPage_Obj.Assertion_product_name(productTitle1));
+        //3>price assertion
+        String price2=d.findElement(By.cssSelector("span[class=\"a-offscreen\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",","");
 
-        String name2=d.findElement(By.cssSelector("span[class=\"a-truncate-cut\"]")).getText().toLowerCase();
-        SoftAssert ass=new SoftAssert();
-           //1>assert qty
-      if(!x){
-            ass.assertTrue( d.findElement(By.cssSelector("span[class=\"a-dropdown-prompt\"]")).getText().toLowerCase().contains("1"));}
-      else
-      {ass.assertTrue( d.findElement(By.cssSelector("span[class=\"a-dropdown-prompt\"]")).getText().toLowerCase().contains("2"));}
-           //2> name assertion
-           ass.assertTrue( productTitle.contains(name2.substring(0, 10)));
-           //3>price assertion
-           ass.assertTrue( price2.contains(price1));
-           //4>assert total price
-        double totalprice1=Double.parseDouble(price1.replace(",",""));
-        double totalprice2= Double.parseDouble(d.findElement(By.id("sc-subtotal-amount-activecart")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",",""));
+        System.out.println(TodayDeals_PgObj.getPrice1());System.out.println(price2);
+        Assert.assertEquals( Double.parseDouble(price2),Totalprice1);
 
-        if(!x){ ass.assertEquals(totalprice1,totalprice2);}else {ass.assertEquals(totalprice1*2,totalprice2);}
-        ass.assertAll();
+        //4>assert total price
+        Assert.assertTrue(cartPage_Obj.Assertion_TotalPrice(Totalprice1));
+        System.out.println(Totalprice1);System.out.println(cartPage_Obj.getPrice2());
+//        ass.assertAll();
     }
-     @Test(priority = 3)
+    @Test(priority = 3)
     public void Scenario_3() {
         //instiate soft assertion
-         SoftAssert ass = new SoftAssert();
+        SoftAssert ass = new SoftAssert();
         // create array list of by locator to use in for loop
-         ArrayList<By> LI = new ArrayList<By>();
-         LI.add(By.id("nav_prefetch_yourorders"));
-         LI.add(By.id("nav_prefetch_youraddresses"));
-         LI.add(By.xpath("//span[text()=\"Your Lists\"]"));
+        ArrayList<By> LI = new ArrayList<By>();
+        LI.add(By.id("nav_prefetch_yourorders"));
+        LI.add(By.id("nav_prefetch_youraddresses"));
+        LI.add(By.xpath("//span[text()=\"Your Lists\"]"));
 
+        for (int i = 0; i < 3; i++) {
+            Home_PgObj.Hover_Hello();
+            waitf().until(ExpectedConditions.visibilityOfElementLocated(LI.get(i)));
+            d.findElement(LI.get(i)).click();
+            if (i == 0 ||i==1) {
+                ass.assertTrue(Home_PgObj.Assertion_WE_in_SignIN_page());
+                d.navigate().back();}
+            else if (i == 2) {
+                ass.assertTrue(Home_PgObj.Assert_seeLists_intro_screen());
+                d.navigate().back();
+            }
 
-         for (int i = 0; i < 3; i++) {
-             hellooverlay_obj.Hover_Hello();
-             waitf().until(ExpectedConditions.visibilityOfElementLocated(LI.get(i)));
-             d.findElement(LI.get(i)).click();
-             if (i == 0 ||i==1) {
-                 ass.assertTrue(hellooverlay_obj.Assertion_WE_in_SignIN_page());
-                 d.navigate().back();}
-              else if (i == 2) {
-                 ass.assertTrue(hellooverlay_obj.Assert_seeLists_intro_screen());
-                 d.navigate().back();
+        }
 
-             }
-
-         }
-
-     }
+    }
 
 }

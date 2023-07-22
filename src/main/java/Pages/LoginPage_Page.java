@@ -21,6 +21,7 @@ public class LoginPage_Page {
 
     }
     public boolean Assertion_login(){
+        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),\"problem\")]")));
         return d.findElement(By.xpath("//*[contains(text(),\"problem\")]")).getText().toLowerCase().contains("problem");
     }
     public Wait waitf(){
