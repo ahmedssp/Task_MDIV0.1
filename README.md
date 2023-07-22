@@ -10,4 +10,5 @@ Create 3 Tests for each Senario using Selenume webdriver and assersion TestNg
        -A- some products have one Item so we add only the available one item to avoide Assertion Faild
        -B- New offers come with product so we reject it
 -3- for senario 3 we run test without loging and roun for loop to loop the senario for each case 
+
 -4- we are using TestNg to Generate test report  
