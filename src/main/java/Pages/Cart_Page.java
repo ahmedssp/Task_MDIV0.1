@@ -63,8 +63,6 @@ public class Cart_Page {
     public boolean Assertion_product_name(String productTitle1) {
 
         setGetProductTitle2(d.findElement(ProductTitle2_field).getText().toLowerCase());
-         System.out.println(getProductTitle2);
-
         return productTitle1.contains(getProductTitle2.substring(0, 10));
     }
     public boolean Assertion_TotalPrice(Double TotalPrice) {

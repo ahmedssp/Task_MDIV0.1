@@ -27,6 +27,7 @@ public class base {
     public void start() throws InterruptedException {
         d= new ChromeDriver();
         d.get("https://www.amazon.eg/");
+        d.navigate().to("https://www.amazon.eg/");
         d.manage().window().maximize();
         Home_PgObj =new Home_Page(d);
         TodayDeals_PgObj=new TodayDeals_Page(d);
@@ -44,7 +45,6 @@ public class base {
         if (ITestResult.FAILURE == result.getStatus()) {
             var camera = (TakesScreenshot) d;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
-
             try {
                 Files.move(screenshot.toPath(), new File("resources/screenshots/" + result.getName() + ".png").toPath());
             } catch (IOException e) {

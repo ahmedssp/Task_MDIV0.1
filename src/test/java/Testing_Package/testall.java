@@ -11,7 +11,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 
-
 public class testall extends base {
     
     @Test(priority = 1)
@@ -37,7 +36,6 @@ public class testall extends base {
         TodayDeals_PgObj.click_second_categoryes();
         //4-click on First product
         TodayDeals_PgObj.click_Firstproduct();
-
         //5-Click on 2nd item in this product
         TodayDeals_PgObj.Second_item_Click();
         //6-add qty=2
@@ -56,14 +54,11 @@ public class testall extends base {
         //1>assert qty
         Assert.assertTrue(cartPage_Obj.Assertion_Qty());
         //2> name assertion
-        System.out.println(productTitle1);
         Assert.assertTrue(cartPage_Obj.Assertion_product_name(productTitle1));
         //3>price assertion
         String price2=d.findElement(By.cssSelector("span[class=\"a-offscreen\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",","");
-
-        System.out.println(TodayDeals_PgObj.getPrice1());System.out.println(price2);
+        ;System.out.println(price2+"/");
         Assert.assertEquals( Double.parseDouble(price2),Totalprice1);
-
         //4>assert total price
         Assert.assertTrue(cartPage_Obj.Assertion_TotalPrice(Totalprice1));
         System.out.println(Totalprice1);System.out.println(cartPage_Obj.getPrice2());
