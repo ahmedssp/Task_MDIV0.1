@@ -12,7 +12,7 @@ import java.time.Duration;
 public class Home_Page {
     private WebDriver d;
     public Home_Page(WebDriver d){this.d=d;}
-    private By Hello_filed = By.id("nav-link-accountList-nav-line-1");
+    private By Hello_filed = By.xpath("//span[text()=\"Account & Lists\"]//span[@class=\"nav-icon nav-arrow\"]");
     private By SignIn_button_filed=By.xpath("//span[@class=\"nav-action-inner\"]");
     private By AllTap_filed = By.xpath("//i[@class=\"hm-icon nav-sprite\"]");
     private  By Todays_Deals_filed=By.xpath("//a[text()=\"Today's Deals\" and @class=\"hmenu-item\"]");
@@ -22,6 +22,7 @@ public class Home_Page {
         Actions ac=new Actions(d);
         waitf().until(ExpectedConditions.visibilityOfElementLocated(Hello_filed));
         ac.moveToElement(d.findElement(Hello_filed)).build().perform();
+
     }
 
     public LoginPage_Page Click_sigenin(){

@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 
 public class testall extends base {
-
-
+    
     @Test(priority = 1)
     public void login_with_nonREjesterdEmail() throws InterruptedException {
 
