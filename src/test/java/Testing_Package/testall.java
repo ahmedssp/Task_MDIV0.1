@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.util.ArrayList;
 public class testall extends base {
-    @Test(priority = 1)
+    @Test(priority = 1) // Senario 1
     public void login_with_nonREjesterdEmail() throws InterruptedException {
         //1-make hover on hello tab
         Home_PgObj.Hover_Hello();
@@ -22,7 +22,8 @@ public class testall extends base {
         loginPagePage_obj.click_continue();
         //5- asserion for cant logen
         Assert.assertTrue(loginPagePage_obj.Assertion_login());
-    }    @Test(priority = 2)
+    }
+    @Test(priority = 2)
     public void added_Items() throws InterruptedException {
         //1-click on all tap
         Home_PgObj.Click_AllTap();
