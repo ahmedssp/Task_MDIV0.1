@@ -83,6 +83,7 @@ public class TodayDeals_Page {
         select.selectByValue("2");
     }catch (Exception e ){System.out.println("this product have one Qty ");setX(false);}
     }
+
    public void prress_add_cart_button(){
        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
        d.findElement(By.id("add-to-cart-button")).click();

@@ -39,6 +39,7 @@ public class testall extends base {
         //5-Click on 2nd item in this product
         TodayDeals_PgObj.Second_item_Click();
         //6-add qty=2
+
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("productTitle")));
         String productTitle1= d.findElement(By.id("productTitle")).getText().toLowerCase();
         Double Totalprice1= Double.parseDouble(d.findElement(By.cssSelector("span[class=\"a-price-whole\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",",""));
@@ -56,9 +57,7 @@ public class testall extends base {
         //2> name assertion
         Assert.assertTrue(cartPage_Obj.Assertion_product_name(productTitle1));
         //3>price assertion
-        String price2=d.findElement(By.cssSelector("span[class=\"a-offscreen\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",","");
-        ;System.out.println(price2+"/");
-        Assert.assertEquals( Double.parseDouble(price2),Totalprice1);
+        Assert.assertEquals(cartPage_Obj.setprice2_G(),Totalprice1);
         //4>assert total price
         Assert.assertTrue(cartPage_Obj.Assertion_TotalPrice(Totalprice1));
         System.out.println(Totalprice1);System.out.println(cartPage_Obj.getPrice2());

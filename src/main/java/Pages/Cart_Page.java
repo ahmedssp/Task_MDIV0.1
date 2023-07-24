@@ -70,6 +70,10 @@ public class Cart_Page {
         System.out.println(getTotalprice2());
         if(!objt.getX()){ return (TotalPrice==getTotalprice2());}else {return (TotalPrice*2==totalprice2);}
     }
+    public double setprice2_G(){
+        setPrice2(d.findElement(By.cssSelector("p[class=\"a-spacing-mini\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",",""));
+        return Double.parseDouble(getPrice2());
+    };
 
     public Wait waitf(){
         Wait wait = new FluentWait( d)
@@ -78,7 +82,5 @@ public class Cart_Page {
                 .ignoring(Exception.class);
         return wait;
     }
-
-
 
 }
