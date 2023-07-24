@@ -77,31 +77,30 @@ public class TodayDeals_Page {
         try {
         setProductTitle1(d.findElement(productTitle1_Field).getText().toLowerCase());
         setPrice1(d.findElement(By.cssSelector("span[class=\"a-price-whole\"]")).getText().toLowerCase());
-
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("quantity")));
         Select select=new Select(d.findElement(By.id("quantity")));
         select.selectByValue("2");
+        setX(true);System.out.println("this Product Have more Than One items ");
     }catch (Exception e ){System.out.println("this product have one Qty ");setX(false);}
     }
 
    public void prress_add_cart_button(){
        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-button")));
        d.findElement(By.id("add-to-cart-button")).click();
-       try {
-           waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("warranty_no_button-announce")));
 
-           d.findElement(By.id("attachSiNoCoverage-announce")).click();
+       try {
+           waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("attachSiNoCoverage")));
+           d.findElement(By.id("attachSiNoCoverage")).click();
+
        }catch (Exception e ){System.out.println("No offers");};
 
    }
    public Cart_Page GotoCarte_page() throws InterruptedException {
 
-
        waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-cart-count-container")));
        d.findElement(By.id("nav-cart-count-container")).click();
         return new  Cart_Page(d);
    }
-
 
     public Wait waitf(){
         Wait wait = new FluentWait( d)

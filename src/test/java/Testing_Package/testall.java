@@ -8,11 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.util.ArrayList;
-
 public class testall extends base {
-    
     @Test(priority = 1)
     public void login_with_nonREjesterdEmail() throws InterruptedException {
 
@@ -39,29 +36,25 @@ public class testall extends base {
         //5-Click on 2nd item in this product
         TodayDeals_PgObj.Second_item_Click();
         //6-add qty=2
-
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("productTitle")));
         String productTitle1= d.findElement(By.id("productTitle")).getText().toLowerCase();
         Double Totalprice1= Double.parseDouble(d.findElement(By.cssSelector("span[class=\"a-price-whole\"]")).getText().toLowerCase().replace("egp","").replace(" ","").replace(",",""));
-
         TodayDeals_PgObj.add_QTY();
 //        7- prress add add-to-cart-button
         TodayDeals_PgObj.prress_add_cart_button();
         //9-go to Chart
         Cart_Page cartPage_Obj= TodayDeals_PgObj.GotoCarte_page();
-
         //10- assert for
-//        SoftAssert ass=new SoftAssert();
-        //1>assert qty
-        Assert.assertTrue(cartPage_Obj.Assertion_Qty());
-        //2> name assertion
-        Assert.assertTrue(cartPage_Obj.Assertion_product_name(productTitle1));
-        //3>price assertion
-        Assert.assertEquals(cartPage_Obj.setprice2_G(),Totalprice1);
-        //4>assert total price
-        Assert.assertTrue(cartPage_Obj.Assertion_TotalPrice(Totalprice1));
-        System.out.println(Totalprice1);System.out.println(cartPage_Obj.getPrice2());
-//        ass.assertAll();
+        SoftAssert ass=new SoftAssert();
+            //1>assert qty
+            ass.assertTrue(cartPage_Obj.Assertion_Qty());
+            //2> name assertion
+            ass.assertTrue(cartPage_Obj.Assertion_product_name(productTitle1));
+            //3>price assertion
+            ass.assertEquals(cartPage_Obj.setprice2_G(),Totalprice1);
+            //4>assert total price
+            ass.assertTrue(cartPage_Obj.Assertion_TotalPrice(Totalprice1));
+        ass.assertAll();
     }
     @Test(priority = 3)
     public void Scenario_3() {
@@ -84,9 +77,6 @@ public class testall extends base {
                 ass.assertTrue(Home_PgObj.Assert_seeLists_intro_screen());
                 d.navigate().back();
             }
-
         }
-
     }
-
 }
