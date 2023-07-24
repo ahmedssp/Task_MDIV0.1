@@ -10,22 +10,30 @@ import java.time.Duration;
 
 public class LoginPage_Page {
     private WebDriver d;
-    public LoginPage_Page(WebDriver d){this.d=d;}
+
+    public LoginPage_Page(WebDriver d) {
+        this.d = d;
+    }
+
     private By firestnameField = By.id("nf-field-17");
-    public  void send_unregister_mail(String unregMail){
+
+    public void send_unregister_mail(String unregMail) {
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.id("ap_email")));
         d.findElement(By.id("ap_email")).sendKeys(unregMail);
     }
-    public void click_continue(){
+
+    public void click_continue() {
         d.findElement(By.id("continue")).click();
 
     }
-    public boolean Assertion_login(){
+
+    public boolean Assertion_login() {
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),\"problem\")]")));
         return d.findElement(By.xpath("//*[contains(text(),\"problem\")]")).getText().toLowerCase().contains("problem");
     }
-    public Wait waitf(){
-        Wait wait = new FluentWait( d)
+
+    public Wait waitf() {
+        Wait wait = new FluentWait(d)
                 .withTimeout(Duration.ofSeconds(12))
                 .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(Exception.class);
