@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class testall extends base {
     @Test(priority = 1)
     public void login_with_nonREjesterdEmail() throws InterruptedException {
-
         //1-make hover on hello tab
         Home_PgObj.Hover_Hello();
         //2- press on sigen in tab

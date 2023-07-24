@@ -6,7 +6,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
 import java.time.Duration;
 
 public class Home_Page {
@@ -17,14 +16,11 @@ public class Home_Page {
     private By AllTap_filed = By.xpath("//i[@class=\"hm-icon nav-sprite\"]");
     private  By Todays_Deals_filed=By.xpath("//a[text()=\"Today's Deals\" and @class=\"hmenu-item\"]");
 
-
     public  void  Hover_Hello(){
         Actions ac=new Actions(d);
         waitf().until(ExpectedConditions.visibilityOfElementLocated(Hello_filed));
         ac.moveToElement(d.findElement(Hello_filed)).build().perform();
-
     }
-
     public LoginPage_Page Click_sigenin(){
 
         waitf().until(ExpectedConditions.visibilityOfElementLocated(SignIn_button_filed));
@@ -42,7 +38,6 @@ public class Home_Page {
 
     }
     public boolean Assert_seeLists_intro_screen( ){
-
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span[class=\"al-intro-banner-header\"]")));
         return  d.findElement(By.cssSelector("span[class=\"al-intro-banner-header\"]")).getText().toLowerCase().contains("lists");
     }
@@ -50,7 +45,6 @@ public class Home_Page {
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class=\"a-spacing-small\"]")));
         return d.findElement(By.cssSelector("h1[class=\"a-spacing-small\"]")).getText().toLowerCase().contains("sign in");
     }
-
     public  Wait waitf(){
         Wait wait = new FluentWait( d)
                 .withTimeout(Duration.ofSeconds(12))
