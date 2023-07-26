@@ -1,6 +1,10 @@
 package Base_Package;
 import Pages.Home_Page;
 import Pages.TodayDeals_Page;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +25,8 @@ public class base {
     protected WebDriver d;
     protected Home_Page Home_PgObj;
     protected TodayDeals_Page TodayDeals_PgObj;
+    protected   ExtentReports extent;
+    protected  ExtentSparkReporter spark;
 
 
     @BeforeMethod
@@ -39,6 +45,16 @@ public class base {
         //2-click on en
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div [@id=\"nav-flyout-icp\"] //a[@href=\"#switch-lang=en_AE\"]")));
         d.findElement(By.xpath("//div [@id=\"nav-flyout-icp\"] //a[@href=\"#switch-lang=en_AE\"]")).click();
+
+        //Extent Report________>>>
+        extent = new ExtentReports();
+        spark = new ExtentSparkReporter("resources/Spark_Extent Report.html");
+        extent.attachReporter(spark);
+        spark.config().setTheme(Theme.DARK);
+        spark.config().setDocumentTitle("report Title^_^");
+        spark.config().setReportName("Report Name");
+
+
     }
     @AfterMethod
     public void end(ITestResult result) throws InterruptedException {
@@ -51,6 +67,7 @@ public class base {
                 e.printStackTrace();
             }
         }
+        extent.flush();
         d.quit();
 
     }

@@ -3,17 +3,22 @@ package Testing_Package;
 import Base_Package.base;
 import Pages.Cart_Page;
 import Pages.LoginPage_Page;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 
 public class testall extends base {
+
     @Test(priority = 1) // Scenario 1
     public void login_with_nonREjesterdEmail() throws InterruptedException {
+        
         //1-make hover on hello tab
         Home_PgObj.Hover_Hello();
         //2- press on sigen in tab
@@ -64,16 +69,10 @@ public class testall extends base {
     public void Scenario_3() {
         //instiate soft assertion
         SoftAssert ass = new SoftAssert();
-        // create array list of by locator to use in for loop
-        ArrayList<By> LI = new ArrayList<By>();
-        LI.add(By.id("nav_prefetch_yourorders"));
-        LI.add(By.id("nav_prefetch_youraddresses"));
-        LI.add(By.xpath("//span[text()=\"Your Lists\"]"));
-
         for (int i = 0; i < 3; i++) {
             Home_PgObj.Hover_Hello();
-            waitf().until(ExpectedConditions.visibilityOfElementLocated(LI.get(i)));
-            d.findElement(LI.get(i)).click();
+            waitf().until(ExpectedConditions.visibilityOfElementLocated(Home_PgObj.li().get(i)));
+            d.findElement( Home_PgObj.li().get(i)).click();
             if (i == 0 || i == 1) {
                 ass.assertTrue(Home_PgObj.Assertion_WE_in_SignIN_page());
                 d.navigate().back();

@@ -1,5 +1,9 @@
 package Pages;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +12,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class Home_Page {
     private WebDriver d;
@@ -15,6 +20,10 @@ public class Home_Page {
     public Home_Page(WebDriver d) {
         this.d = d;
     }
+    protected ExtentReports extent;
+    protected ExtentSparkReporter spark;
+    ExtentTest test;
+
 
     private By Hello_filed = By.xpath("//span[text()=\"Account & Lists\"]//span[@class=\"nav-icon nav-arrow\"]");
     private By SignIn_button_filed = By.xpath("//span[@class=\"nav-action-inner\"]");
@@ -22,11 +31,12 @@ public class Home_Page {
     private By Todays_Deals_filed = By.xpath("//a[text()=\"Today's Deals\" and @class=\"hmenu-item\"]");
 
     public void Hover_Hello() {
+
+
         Actions ac = new Actions(d);
         waitf().until(ExpectedConditions.visibilityOfElementLocated(Hello_filed));
         ac.moveToElement(d.findElement(Hello_filed)).build().perform();
     }
-
     public LoginPage_Page Click_sigenin() {
 
         waitf().until(ExpectedConditions.visibilityOfElementLocated(SignIn_button_filed));
@@ -55,6 +65,13 @@ public class Home_Page {
         waitf().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[class=\"a-spacing-small\"]")));
         return d.findElement(By.cssSelector("h1[class=\"a-spacing-small\"]")).getText().toLowerCase().contains("sign in");
     }
+    public  ArrayList <By> li(){
+        ArrayList<By> LI = new ArrayList<By>();
+        LI.add(By.id("nav_prefetch_yourorders"));
+        LI.add(By.id("nav_prefetch_youraddresses"));
+        LI.add(By.xpath("//span[text()=\"Your Lists\"]"));
+        return LI;
+    };
 
     public Wait waitf() {
         Wait wait = new FluentWait(d)
