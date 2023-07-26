@@ -1,5 +1,5 @@
 # Task_MDIV0.1
-Create 3 Tests for each Senario using Selenume webdriver and assersion TestNg
+Create 3 Tests for each Senario using Selenium  webdriver and assersion TestNg
 
 -1-for Senario 1 add @Test we using Valid Gmail But not registered email
 
